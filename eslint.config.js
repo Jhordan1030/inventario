@@ -29,5 +29,13 @@ export default [
         { allowConstantExport: true },
       ],
     },
+    "env": {
+      "node": true,
+      "commonjs": true
+    },
+    "globals": {
+      "process": "readonly"
+    }
+
   },
 ]

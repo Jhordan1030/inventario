@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  api:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db   # El nombre del servicio de la base de datos es 'db'
+      - DB_PORT=5432 # Conéctate al puerto 5432 de PostgreSQL dentro del contenedor
+      - DB_USER=postgres
+      - DB_PASSWORD=inventariofacil123
+      - DB_NAME=inventariofacil
+    depends_on:
+      - db
+    networks:
+      - inventariofacil_network
+
+  db:
+    image: postgres:17
+    ports:
+      - "5434:5432"  # Mapeamos el puerto 5434 del host al puerto 5432 dentro del contenedor
+    environment:
+      - POSTGRES_PASSWORD=inventariofacil123
+      - POSTGRES_DB=inventariofacil
+    networks:
+      - inventariofacil_network
+
+networks:
+  inventariofacil_network:
+    driver: bridge
